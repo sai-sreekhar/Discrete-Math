@@ -15,11 +15,11 @@ Proof::Proof(int lineNumber, vector<string> parts, vector<Proof *> previousLines
     if (!parts.empty())
     {
         string postfix = infixToPostfix(parts[0]);
-        formula = postfixExpressionToTree(&postfix);
+        parseTree = postfixExpressionToTree(&postfix);
     }
     if (parts.size() > 1)
     {
-        ruleLiteral = parts[1];
+        rule = parts[1];
     }
     int lineNumber1, lineNumber2;
     if (parts.size() > 2 and lineNumber > (lineNumber1 = stoi(parts[2])))

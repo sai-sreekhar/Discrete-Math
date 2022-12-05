@@ -6,35 +6,35 @@ using namespace operators;
 bool isValid(Proof *lineInput)
 {
     using namespace ruleLiterals;
-    if (lineInput->ruleLiteral == PREMISE)
+    if (lineInput->rule == PREMISE)
     {
         return isValidPremise(lineInput);
     }
-    else if (lineInput->ruleLiteral == AND_INTRODUCIION)
+    else if (lineInput->rule == AND_INTRODUCIION)
     {
         return isValidAndIntroduction(lineInput);
     }
-    else if (lineInput->ruleLiteral == AND_ELMINATION_1)
+    else if (lineInput->rule == AND_ELMINATION_1)
     {
         return isValidAndElimination1(lineInput);
     }
-    else if (lineInput->ruleLiteral == AND_ELIMNATION_2)
+    else if (lineInput->rule == AND_ELIMNATION_2)
     {
         return isValidAndElimnation2(lineInput);
     }
-    else if (lineInput->ruleLiteral == OR_INTRODUCTION_1)
+    else if (lineInput->rule == OR_INTRODUCTION_1)
     {
         return isValidOrIntroduction1(lineInput);
     }
-    else if (lineInput->ruleLiteral == OR_INTRODUCTION_2)
+    else if (lineInput->rule == OR_INTRODUCTION_2)
     {
         return isValidOrIntroduction2(lineInput);
     }
-    else if (lineInput->ruleLiteral == IMPLIES_ELIMINATION)
+    else if (lineInput->rule == IMPLIES_ELIMINATION)
     {
         return isValidImpliesElimination(lineInput);
     }
-    else if (lineInput->ruleLiteral == MODUS_TOLLENS)
+    else if (lineInput->rule == MODUS_TOLLENS)
     {
         return isValidModusTollens(lineInput);
     }
@@ -57,36 +57,36 @@ bool isValidAndIntroduction(Proof *lineInput)
     {
         return false;
     }
-    return lineInput->formula->leftChild->getInorderTraversal() == lineInput->line1->formula->getInorderTraversal() and
-           lineInput->formula->rightChild->getInorderTraversal() == lineInput->line2->formula->getInorderTraversal();
+    return lineInput->parseTree->leftChild->getInorderTraversal() == lineInput->line1->parseTree->getInorderTraversal() and
+           lineInput->parseTree->rightChild->getInorderTraversal() == lineInput->line2->parseTree->getInorderTraversal();
 }
 
 bool isValidAndElimination1(Proof *lineInput)
 {
-    if (lineInput->line2 or !lineInput->line1 or !lineInput->line1->isValidFormula or lineInput->line1->formula->data != AND_OPERATOR)
+    if (lineInput->line2 or !lineInput->line1 or !lineInput->line1->isValidFormula or lineInput->line1->parseTree->data != AND_OPERATOR)
         return false;
-    return lineInput->line1->formula->leftChild->getInorderTraversal() == lineInput->formula->getInorderTraversal();
+    return lineInput->line1->parseTree->leftChild->getInorderTraversal() == lineInput->parseTree->getInorderTraversal();
 }
 
 bool isValidAndElimnation2(Proof *lineInput)
 {
-    if (lineInput->line2 or !lineInput->line1 or !lineInput->line1->isValidFormula or lineInput->line1->formula->data != AND_OPERATOR)
+    if (lineInput->line2 or !lineInput->line1 or !lineInput->line1->isValidFormula or lineInput->line1->parseTree->data != AND_OPERATOR)
         return false;
-    return lineInput->line1->formula->rightChild->getInorderTraversal() == lineInput->formula->getInorderTraversal();
+    return lineInput->line1->parseTree->rightChild->getInorderTraversal() == lineInput->parseTree->getInorderTraversal();
 }
 
 bool isValidOrIntroduction1(Proof *lineInput)
 {
     if (lineInput->line2 or !lineInput->line1 or !lineInput->line1->isValidFormula)
         return false;
-    return lineInput->line1->formula->getInorderTraversal() == lineInput->formula->leftChild->getInorderTraversal();
+    return lineInput->line1->parseTree->getInorderTraversal() == lineInput->parseTree->leftChild->getInorderTraversal();
 }
 
 bool isValidOrIntroduction2(Proof *lineInput)
 {
     if (lineInput->line2 or !lineInput->line1 or !lineInput->line1->isValidFormula)
         return false;
-    return lineInput->line1->formula->getInorderTraversal() == lineInput->formula->rightChild->getInorderTraversal();
+    return lineInput->line1->parseTree->getInorderTraversal() == lineInput->parseTree->rightChild->getInorderTraversal();
 }
 
 bool isValidImpliesElimination(Proof *lineInput)
@@ -95,10 +95,10 @@ bool isValidImpliesElimination(Proof *lineInput)
         return false;
     if (!lineInput->line2 or !lineInput->line2->isValidFormula)
         return false;
-    if (lineInput->line1->formula->data != IMPLIES_OPERATOR)
+    if (lineInput->line1->parseTree->data != IMPLIES_OPERATOR)
         return false;
-    return lineInput->line1->formula->leftChild->getInorderTraversal() == lineInput->line2->formula->getInorderTraversal() and
-           lineInput->line1->formula->rightChild->getInorderTraversal() == lineInput->formula->getInorderTraversal();
+    return lineInput->line1->parseTree->leftChild->getInorderTraversal() == lineInput->line2->parseTree->getInorderTraversal() and
+           lineInput->line1->parseTree->rightChild->getInorderTraversal() == lineInput->parseTree->getInorderTraversal();
 }
 
 bool isValidModusTollens(Proof *lineInput)
@@ -107,10 +107,10 @@ bool isValidModusTollens(Proof *lineInput)
         return false;
     if (!lineInput->line2 or !lineInput->line2->isValidFormula)
         return false;
-    if (lineInput->line1->formula->data != IMPLIES_OPERATOR)
+    if (lineInput->line1->parseTree->data != IMPLIES_OPERATOR)
         return false;
-    if (lineInput->formula->data != NEGATION_OPERATOR or lineInput->line2->formula->data != NEGATION_OPERATOR)
+    if (lineInput->parseTree->data != NEGATION_OPERATOR or lineInput->line2->parseTree->data != NEGATION_OPERATOR)
         return false;
-    return lineInput->line1->formula->leftChild->getInorderTraversal() == lineInput->formula->rightChild->getInorderTraversal() and
-           lineInput->line1->formula->rightChild->getInorderTraversal() == lineInput->line2->formula->rightChild->getInorderTraversal();
+    return lineInput->line1->parseTree->leftChild->getInorderTraversal() == lineInput->parseTree->rightChild->getInorderTraversal() and
+           lineInput->line1->parseTree->rightChild->getInorderTraversal() == lineInput->line2->parseTree->rightChild->getInorderTraversal();
 }

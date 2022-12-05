@@ -34,7 +34,7 @@ string infixToPostfix(string infixExpression)
         {
             while (operatorStack.top() != '(')
             {
-                postfixExpression.push_back(operatorStack.top()); // keep popping operators till next open parenthesis
+                postfixExpression.push_back(operatorStack.top());
                 operatorStack.pop();
             }
             operatorStack.pop();

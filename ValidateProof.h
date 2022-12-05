@@ -8,8 +8,8 @@ class Proof
 {
 public:
     int lineNumber;
-    BinaryTree *formula;
-    std::string ruleLiteral;
+    BinaryTree *parseTree;
+    std::string rule;
     Proof *line1;
     Proof *line2;
     bool isValidFormula;
