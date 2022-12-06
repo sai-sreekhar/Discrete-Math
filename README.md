@@ -1,3 +1,5 @@
 # Discrete-Math
 
-Validating Proof using code
+Validating Proof
+
+Used GITHUB CoPilot to generate comments.
