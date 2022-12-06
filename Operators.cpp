@@ -2,17 +2,22 @@
 
 bool isOperand(char input)
 {
+    // Check if the input is a lowercase letter
     if (input >= 'a' && input <= 'z')
     {
+        // If it is, return true
         return true;
     }
 
+    // If it is not, return false
     return false;
 }
 
+// This function takes a character as input and compares it with the operators
+// defined in the operators namespace. If the input matches one of the operators
+// in the namespace, then it returns true. Otherwise, it returns false.
 bool isOperator(char input)
 {
-
     using namespace operators;
     const char validOperators[] = {NEGATION_OPERATOR, AND_OPERATOR, OR_OPERATOR, IMPLIES_OPERATOR};
     for (int i = 0; i < 4; i++)
@@ -27,6 +32,8 @@ bool isOperator(char input)
 
 int getOperatorPriority(char operatorInput)
 {
+    // Returns the priority of the operators.
+    // The higher the value, the higher the priority.
     using namespace operators;
     switch (operatorInput)
     {
