@@ -8,6 +8,19 @@
 
 using namespace std;
 
+string removesSpaces(string str)
+{
+    int x = 0, y = 0;
+    while (str[x])
+    {
+        if (str[x] != ' ')
+            str[y++] = str[x];
+        x++;
+    }
+    str.erase(str.begin() + y, str.end());
+    return str;
+}
+
 Proof::Proof(int lineNumber, vector<string> parts, vector<Proof *> previousLines)
 {
     this->lineNumber = lineNumber;
@@ -99,6 +112,7 @@ void validateProof()
         string line;
         cout << i << ": ";
         getline(cin, line);
+        line = removesSpaces(line);
         // Parse the line into a Proof object.
         proof.push_back(parseLine(line, i, proof));
     }

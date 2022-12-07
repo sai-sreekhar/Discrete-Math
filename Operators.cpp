@@ -3,14 +3,7 @@
 bool isOperand(char input)
 {
     // Check if the input is a lowercase letter
-    if (input >= 'a' && input <= 'z')
-    {
-        // If it is, return true
-        return true;
-    }
-
-    // If it is not, return false
-    return false;
+    return input >= 'a' && input <= 'z';
 }
 
 // This function takes a character as input and compares it with the operators

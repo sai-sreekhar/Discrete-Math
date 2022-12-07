@@ -1,11 +1,6 @@
 #include "BinaryTree.h"
 
-BinaryTree::BinaryTree(char data) // constructor with data parameter
-{
-    data = data; // set the data member to the data parameter
-    leftChild = nullptr; // set the left child to a null value
-    rightChild = nullptr; // set the right child to a null value
-}
+BinaryTree::BinaryTree(char data) : data(data), leftChild(nullptr), rightChild(nullptr) {}
 
 // destructor for BinaryTree class
 BinaryTree::~BinaryTree()
@@ -45,12 +40,12 @@ std::string BinaryTree::getInorderTraversal()
 
     // Add the data to the traversal
     inorderTraversal += data;
-    
+
     // If the right child exists, recurse and add the result to the traversal
     if (rightChild)
     {
         inorderTraversal += rightChild->getInorderTraversal();
     }
-    
+
     return inorderTraversal;
 }
