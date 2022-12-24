@@ -129,4 +129,5 @@ void validateProof()
     }
     // If all lines are valid, print a success message.
     cout << "Valid proof\n";
+    return;
 }

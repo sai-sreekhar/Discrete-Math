@@ -68,7 +68,8 @@ int generateFunc(node *adjancencyList1[], node *adjacencyList2[], int map[], int
 
 int main()
 {
-    printf("Enter the number of vertices and edges of the first graph: \n");
+    freopen("a.txt", "r", stdin);
+    freopen("out-ac.txt", "w", stdout);
     scanf("%d %d", &n1, &m1);
     node *adjancencyList1[n1];
     int map[n1], rev_map[n1];
@@ -83,7 +84,8 @@ int main()
         scanf("%d %d", &a, &b);
         push(&(adjancencyList1[a]), b);
     }
-    printf("Enter the number of vertices and edges of the second graph: \n");
+    fclose(stdin);
+    freopen("c.txt", "r", stdin);
     scanf("%d %d", &n2, &m2);
     node *adjacencyList2[n2];
     for (int i = 0; i < n2; i++)
@@ -105,4 +107,6 @@ int main()
     {
         printf("Isomorphic.\n");
     }
+    fclose(stdin);
+    fclose(stdout);
 }

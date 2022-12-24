@@ -66,7 +66,10 @@ bool isValid(Proof *lineInput)
  */
 bool isValidPremise(Proof *lineInput)
 {
-    return !(lineInput->line1 or lineInput->line2);
+    if(!lineInput->line1 &&  !lineInput->line2)
+        return true;
+    return false;
+    // return !(lineInput->line1 or lineInput->line2);
 }
 
 // This function is used to check if a line of proof has a valid introduction of the and operator. 
